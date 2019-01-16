@@ -8,8 +8,8 @@ namespace BeFaster.App.Solutions.CHK
     {
         public class Good
         {
-            public char Item;
-            public int Amount;
+            public char Item { get;  }
+            public int Amount { get; set; }
             public Good(char item, int amount)
             {
                 Item = item;
@@ -19,15 +19,16 @@ namespace BeFaster.App.Solutions.CHK
         public class PriceRule : Good
         {
 
-            public int Price;
-            public Good BonusItem;
+            public int Price { get; }
+            public Good BonusItem { get;  }
             public PriceRule(char item, int amount, int price, Good bonusItem = null) : base(item, amount)
             {
                 Price = price;
                 BonusItem = bonusItem;
             }
         }
-        public static List<char> GroupRule = new char[] { 'S', 'T', 'X','Y','Z' }.ToList();
+        public static int GroupPrice = 45;
+       public static List<char> GroupRule = new char[] { 'S', 'T', 'X', 'Y', 'Z' }.ToList();
         public static List<PriceRule> priceRules = new List<PriceRule>()
         {
             new PriceRule('E', 2, 80, new Good('B', 1)),
@@ -61,16 +62,16 @@ namespace BeFaster.App.Solutions.CHK
             new PriceRule('Q', 3, 80),
             new PriceRule('Q', 1, 30),
             new PriceRule('R', 1, 50),
-            new PriceRule('S', 1, 30),
+            new PriceRule('S', 1, 20),
             new PriceRule('T', 1, 20),
             new PriceRule('U', 1, 40),
             new PriceRule('V', 3, 130),
             new PriceRule('V', 2, 90),
             new PriceRule('V', 1, 50),
             new PriceRule('W', 1, 20),
-            new PriceRule('X', 1, 90),
-            new PriceRule('Y', 1, 10),
-            new PriceRule('Z', 1, 50),
+            new PriceRule('X', 1, 17),
+            new PriceRule('Y', 1, 20),
+            new PriceRule('Z', 1, 21),
         };
 
         public static int Checkout(string skus)
@@ -93,21 +94,47 @@ namespace BeFaster.App.Solutions.CHK
         {
             var sum = 0;
 
-            foreach (var rule in priceRules)
+            List<PriceRule> groupGoods = new List<PriceRule>();
+            foreach (var groupItem in GroupRule)
             {
-                while (basket.ContainsKey(rule.Item) && basket[rule.Item] >= rule.Amount)
+                if (basket.ContainsKey(groupItem))
                 {
-                    basket[rule.Item] -= rule.Amount;
-                    sum += rule.Price;
-                    if (rule.BonusItem != null)
+                    var count = basket[groupItem];
+                    basket[groupItem] = 0;//remove group items
+                    var price = priceRules.First(a => a.Item == groupItem && a.Amount == 1).Price;
+                    for (int i = 0; i < count; i++)
                     {
-                        if (basket.ContainsKey(rule.BonusItem.Item) && basket[rule.BonusItem.Item] >= rule.BonusItem.Amount){
-                            basket[rule.BonusItem.Item] -= rule.BonusItem.Amount;
+                        groupGoods.Add(new PriceRule(groupItem, 1, price));
+                    }
+                }
+
+            };
+            var groupsNumber = groupGoods.Count / 3;
+            sum += GroupPrice * groupsNumber;
+
+            var restItems = groupGoods.Count % 3;
+            var ItemsToAddBack = groupGoods.OrderBy(g => g.Price).Take(restItems);
+            foreach(var itemBack in ItemsToAddBack)//add odd back
+            {
+                basket[itemBack.Item] = itemBack.Amount;
+            }
+
+            foreach (var priceRule in priceRules)
+            {
+                while (basket.ContainsKey(priceRule.Item) && basket[priceRule.Item] >= priceRule.Amount)
+                {
+                    basket[priceRule.Item] -= priceRule.Amount;
+                    sum += priceRule.Price;
+                    if (priceRule.BonusItem != null)
+                    {
+                        if (basket.ContainsKey(priceRule.BonusItem.Item) && basket[priceRule.BonusItem.Item] >= priceRule.BonusItem.Amount)
+                        {
+                            basket[priceRule.BonusItem.Item] -= priceRule.BonusItem.Amount;
                         }
                     }
-                    if (basket[rule.Item] == 0)
+                    if (basket[priceRule.Item] == 0)
                     {
-                        basket.Remove(rule.Item);
+                        basket.Remove(priceRule.Item);
                     }
                 }
             }
@@ -115,3 +142,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
