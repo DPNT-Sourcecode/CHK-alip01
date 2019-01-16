@@ -31,6 +31,9 @@ namespace BeFaster.App.Solutions.CHK
         {
             new PriceRule('E', 2, 80, new Good('B', 1)),
             new PriceRule('F', 2, 20, new Good('F', 1)),
+            new PriceRule('N', 3, 120, new Good('M', 1)),
+            new PriceRule('R', 3, 150, new Good('Q', 1)),
+            new PriceRule('U', 3, 120, new Good('U', 1)),
             new PriceRule('A', 5, 200),
             new PriceRule('A', 3, 130),
             new PriceRule('A', 1, 50),
@@ -40,6 +43,33 @@ namespace BeFaster.App.Solutions.CHK
             new PriceRule('D', 1, 15),
             new PriceRule('E', 1, 40),
             new PriceRule('F', 1, 10),
+            new PriceRule('G', 1, 20),
+            new PriceRule('H', 10, 80),
+            new PriceRule('H', 5, 45),
+            new PriceRule('H', 1, 10),
+            new PriceRule('I', 1, 35),
+            new PriceRule('J', 1, 60),
+            new PriceRule('K', 2, 150),
+            new PriceRule('K', 1, 80),
+            new PriceRule('L', 1, 90),
+            new PriceRule('M', 1, 15),
+            new PriceRule('N', 1, 40),
+            new PriceRule('O', 1, 10),
+            new PriceRule('P', 5, 200),
+            new PriceRule('P', 1, 50),
+            new PriceRule('Q', 3, 80),
+            new PriceRule('Q', 1, 30),
+            new PriceRule('R', 1, 50),
+            new PriceRule('S', 1, 30),
+            new PriceRule('T', 1, 20),
+            new PriceRule('U', 1, 40),
+            new PriceRule('V', 3, 130),
+            new PriceRule('V', 2, 90),
+            new PriceRule('V', 1, 50),
+            new PriceRule('W', 1, 20),
+            new PriceRule('X', 1, 90),
+            new PriceRule('Y', 1, 10),
+            new PriceRule('Z', 1, 50),
         };
 
         public static int Checkout(string skus)
@@ -87,6 +117,3 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
-
-
-
