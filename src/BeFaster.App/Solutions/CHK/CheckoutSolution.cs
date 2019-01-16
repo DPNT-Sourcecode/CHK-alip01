@@ -30,6 +30,7 @@ namespace BeFaster.App.Solutions.CHK
         public static List<PriceRule> priceRules = new List<PriceRule>()
         {
             new PriceRule('E', 2, 80, new Good('B', 1)),
+            new PriceRule('F', 2, 20, new Good('F', 1)),
             new PriceRule('A', 5, 200),
             new PriceRule('A', 3, 130),
             new PriceRule('A', 1, 50),
@@ -38,6 +39,7 @@ namespace BeFaster.App.Solutions.CHK
             new PriceRule('C', 1, 20),
             new PriceRule('D', 1, 15),
             new PriceRule('E', 1, 40),
+            new PriceRule('F', 10, 40),
         };
 
         public static int Checkout(string skus)
@@ -85,3 +87,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
