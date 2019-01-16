@@ -10,26 +10,34 @@ namespace BeFaster.App.Solutions.CHK
         {
             public char Item;
             public int Amount;
+            public Good(char item, int amount)
+            {
+                Item = item;
+                Amount = amount;
+            }
         }
         public class PriceRule : Good
         {
 
             public int Price;
-            public PriceRule(char item, int amount, int price)
+            public Good BonusItem;
+            public PriceRule(char item, int amount, int price, Good bonusItem = null) : base(item, amount)
             {
-                Item = item;
-                Amount = amount;
                 Price = price;
+                BonusItem = bonusItem;
             }
         }
         public static List<PriceRule> priceRules = new List<PriceRule>()
         {
+            new PriceRule('E', 2, 80, new Good('B', 1)),
+            new PriceRule('A', 5, 200),
             new PriceRule('A', 3, 130),
             new PriceRule('A', 1, 50),
             new PriceRule('B', 2, 45),
             new PriceRule('B', 1, 30),
             new PriceRule('C', 1, 20),
             new PriceRule('D', 1, 15),
+            new PriceRule('E', 1, 40),
         };
 
         public static int Checkout(string skus)
@@ -57,10 +65,16 @@ namespace BeFaster.App.Solutions.CHK
             var sum = 0;
             foreach (var rule in priceRules)
             {
-                while (basket.ContainsKey(rule.Item)&&basket[rule.Item] >= rule.Amount)
+                while (basket.ContainsKey(rule.Item) && basket[rule.Item] >= rule.Amount)
                 {
                     basket[rule.Item] -= rule.Amount;
                     sum += rule.Price;
+                    if (rule.BonusItem != null)
+                    {
+                        if (basket.ContainsKey(rule.BonusItem.Item) && basket[rule.BonusItem.Item] >= rule.BonusItem.Amount){
+                            basket[rule.BonusItem.Item] -= rule.BonusItem.Amount;
+                        }
+                    }
                     if (basket[rule.Item] == 0)
                     {
                         basket.Remove(rule.Item);
@@ -71,3 +85,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
