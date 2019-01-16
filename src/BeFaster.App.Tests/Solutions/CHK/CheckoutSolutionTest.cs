@@ -16,5 +16,25 @@ namespace BeFaster.App.Tests.Solutions.CHK
         {
             return CheckoutSolution.Checkout(skus);
         }
+        [TestCase("A", ExpectedResult = 50)]
+        public int CheckoutA(string skus)
+        {
+            return CheckoutSolution.Checkout(skus);
+        }
+        [TestCase("AA", ExpectedResult = 100)]
+        public int CheckoutAA(string skus)
+        {
+            return CheckoutSolution.Checkout(skus);
+        }
+        [TestCase("AAA", ExpectedResult = 130)]
+        public int CheckoutAAA(string skus)
+        {
+            return CheckoutSolution.Checkout(skus);
+        }
+        [TestCase("AAAA", ExpectedResult = 180)]
+        public int CheckoutAAAA(string skus)
+        {
+            return CheckoutSolution.Checkout(skus);
+        }
     }
 }
