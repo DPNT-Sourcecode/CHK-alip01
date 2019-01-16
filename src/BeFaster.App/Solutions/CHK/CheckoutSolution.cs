@@ -51,8 +51,8 @@ namespace BeFaster.App.Solutions.CHK
             new PriceRule('H', 1, 10),
             new PriceRule('I', 1, 35),
             new PriceRule('J', 1, 60),
-            new PriceRule('K', 2, 150),
-            new PriceRule('K', 1, 80),
+            new PriceRule('K', 2, 120),
+            new PriceRule('K', 1, 70),
             new PriceRule('L', 1, 90),
             new PriceRule('M', 1, 15),
             new PriceRule('N', 1, 40),
@@ -146,6 +146,7 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
 
