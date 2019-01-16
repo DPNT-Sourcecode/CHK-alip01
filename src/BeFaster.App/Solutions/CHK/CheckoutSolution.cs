@@ -116,7 +116,7 @@ namespace BeFaster.App.Solutions.CHK
             var ItemsToAddBack = groupGoods.OrderBy(g => g.Price).Take(restItems);
             foreach(var itemBack in ItemsToAddBack)//add odd back
             {
-                basket[itemBack.Item] = itemBack.Amount;
+                basket[itemBack.Item]++;
             }
 
             foreach (var priceRule in priceRules)
@@ -142,4 +142,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
