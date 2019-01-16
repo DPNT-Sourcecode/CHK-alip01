@@ -61,11 +61,12 @@ namespace BeFaster.App.Tests.Solutions.CHK
         {
             return CheckoutSolution.Checkout(skus);
         }
-        [TestCase("SSXXV", ExpectedResult = 45+17)]
+        [TestCase("SSXXV", ExpectedResult = 45+17+50)]
         public int CheckoutSSXXV(string skus)
         {
             return CheckoutSolution.Checkout(skus);
         }
     }
 }
+
 

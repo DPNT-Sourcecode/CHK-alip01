@@ -100,7 +100,7 @@ namespace BeFaster.App.Solutions.CHK
                 if (basket.ContainsKey(groupItem))
                 {
                     var count = basket[groupItem];
-                    basket[groupItem] = 0;//remove group items
+                    basket.Remove(groupItem);//remove group items
                     var price = priceRules.First(a => a.Item == groupItem && a.Amount == 1).Price;
                     for (int i = 0; i < count; i++)
                     {
@@ -116,7 +116,11 @@ namespace BeFaster.App.Solutions.CHK
             var ItemsToAddBack = groupGoods.OrderBy(g => g.Price).Take(restItems);
             foreach(var itemBack in ItemsToAddBack)//add odd back
             {
-                basket[itemBack.Item]++;
+                if (basket.ContainsKey(itemBack.Item))
+                {
+                    basket[itemBack.Item]++;
+                }
+                basket.Add(itemBack.Item,1);
             }
 
             foreach (var priceRule in priceRules)
@@ -142,5 +146,6 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
