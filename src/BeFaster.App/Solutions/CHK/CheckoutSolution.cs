@@ -39,7 +39,7 @@ namespace BeFaster.App.Solutions.CHK
             new PriceRule('C', 1, 20),
             new PriceRule('D', 1, 15),
             new PriceRule('E', 1, 40),
-            new PriceRule('F', 1, 40),
+            new PriceRule('F', 1, 10),
         };
 
         public static int Checkout(string skus)
@@ -87,5 +87,6 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
