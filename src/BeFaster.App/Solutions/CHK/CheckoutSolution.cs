@@ -57,7 +57,7 @@ namespace BeFaster.App.Solutions.CHK
             var sum = 0;
             foreach (var rule in priceRules)
             {
-                while (basket[rule.Item] >= rule.Amount)
+                while (basket.ContainsKey(rule.Item)&&basket[rule.Item] >= rule.Amount)
                 {
                     basket[rule.Item] -= rule.Amount;
                     sum += rule.Price;
@@ -71,4 +71,3 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
-
