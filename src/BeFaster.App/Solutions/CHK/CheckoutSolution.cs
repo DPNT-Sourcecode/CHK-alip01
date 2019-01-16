@@ -27,6 +27,7 @@ namespace BeFaster.App.Solutions.CHK
                 BonusItem = bonusItem;
             }
         }
+        public static List<char> GroupRule = new char[] { 'S', 'T', 'X','Y','Z' }.ToList();
         public static List<PriceRule> priceRules = new List<PriceRule>()
         {
             new PriceRule('E', 2, 80, new Good('B', 1)),
@@ -90,11 +91,8 @@ namespace BeFaster.App.Solutions.CHK
         }
         public static int CalculateSum(Dictionary<char, int> basket)
         {
-            //if (basket.Count() == 0)
-            //{
-            //    return sum;
-            //}
             var sum = 0;
+
             foreach (var rule in priceRules)
             {
                 while (basket.ContainsKey(rule.Item) && basket[rule.Item] >= rule.Amount)
@@ -117,3 +115,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
